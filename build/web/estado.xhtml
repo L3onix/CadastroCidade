@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro Estados</title>
+    </h:head>
+    <h:body>
+        <h:form id="formCadastro">
+            <p:panel header="Cadastro de Estado">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nome:" for="nome"/>
+                    <p:inputText value="#{estadoMB.estado.nome}" id="nome"
+                                 required="true" requiredMessage="O campo NOME é obrigatório."
+                                 maxlength="45" placeholder="Digite o nome do estado." />
+                    
+                    <p:outputLabel value="Sigla:" for="sigla"/>
+                    <p:inputText value="#{estadoMB.estado.sigla}" id="sigla"
+                                 required="true" requiredMessage="O campo SIGLA é obrigatório."
+                                 maxlength="45" placeholder="Digite a sigla do estado." />
+                    
+                    <p:commandButton value="Salvar" action="#{estadoMB.salvar}" update="@form :formLista"/>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+        
+        <h:form id="formLista">
+            <p:dataTable var="item" value="#{estadoMB.lista}" emptyMessage="Sem registros">
+                <p:column headerText="ID">
+                    #{item.id}
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{item.nome}" filterBy="#{item.nome}" filterMatchMode="contains">
+                    #{item.nome}
+                </p:column>
+                <p:column headerText="Sigla">
+                    #{item.sigla}
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
